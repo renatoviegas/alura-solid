@@ -3,63 +3,35 @@ package br.com.alura.rh.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Funcionario {
+public class Funcionario extends PessoaFisica {
 
-	private String nome;
-	private String cpf;
-	private Cargo cargo;
-	private BigDecimal salario;
+	private DadosTrabalhistas dadosTrabalhistas;
 	private LocalDate dataUltimoReajuste;
 
 	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario) {
 		this.nome = nome;
 		this.cpf = cpf;
-		this.cargo = cargo;
-		this.salario = salario;
+		this.dadosTrabalhistas = new DadosTrabalhistas(cargo, salario);
 	}
 
 	public void atualizarSalario(BigDecimal novoSalario) {
-		this.salario = novoSalario;
+		this.dadosTrabalhistas.setSalario(novoSalario);
 		this.dataUltimoReajuste = LocalDate.now();
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
 	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+		return dadosTrabalhistas.getCargo();
 	}
 
 	public BigDecimal getSalario() {
-		return salario;
-	}
-
-	public void setSalario(BigDecimal salario) {
-		this.salario = salario;
+		return dadosTrabalhistas.getSalario();
 	}
 
 	public LocalDate getDataUltimoReajuste() {
 		return dataUltimoReajuste;
 	}
 
-	public void setDataUltimoReajuste(LocalDate dataUltimoReajuste) {
-		this.dataUltimoReajuste = dataUltimoReajuste;
-	}
+	public void promover(Cargo proximoCargo) {
+		this.dadosTrabalhistas.setCargo(proximoCargo);		
+	}	
 }
